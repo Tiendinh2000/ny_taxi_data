@@ -31,7 +31,6 @@ def main(params):
 
 # create engine and ingest into postgre
     engine  = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{db}')
-
     df_iter = pd.read_csv(csv_output_path, iterator=True, chunksize=100000)
     df = next(df_iter)
     
