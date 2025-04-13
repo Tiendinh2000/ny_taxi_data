@@ -1,0 +1,30 @@
+services:
+  pgdatabase:
+    container_name: pgdatabase
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test 
+      - POSTGRES_DB=ny_taxi
+    volumes:
+      - "dtc_postgre_volume_local:/var/lib/postgresql/data:rw"
+    ports:
+      - "5431:5432"
+    networks:
+      - pg_network
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com 
+      - PGADMIN_DEFAULT_PASSWORD=root 
+    ports:
+      - "8080:80"
+    networks:
+      - pg_network
+volumes:
+  dtc_postgre_volume_local:
+    external: true
+networks:
+  pg_network:
+    external: true
